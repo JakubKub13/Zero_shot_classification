@@ -23,3 +23,12 @@ len(data_frame)
 
 data_frame.sample(frac=1).head()
 
+labels = list(set(data_frame['labels']))
+labels
+
+print(textwrap.fill(data_frame.iloc[1024]['text']))
+
+data_frame.iloc[1024]['labels']
+
+classifier(data_frame.iloc[1024]['text'], candidate_labels=labels)
+
