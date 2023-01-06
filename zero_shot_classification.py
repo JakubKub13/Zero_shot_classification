@@ -35,3 +35,7 @@ classifier(data_frame.iloc[1024]['text'], candidate_labels=labels)
 # Takes about 55 min
 predictions = classifier(data_frame['text'].tolist(), candidate_labels=labels)
 
+predicted_labels = [d['labels'][0] for d in predictions]
+data_frame['predicted_labels'] = predicted_labels
+
+
