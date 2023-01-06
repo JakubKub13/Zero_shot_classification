@@ -38,4 +38,26 @@ predictions = classifier(data_frame['text'].tolist(), candidate_labels=labels)
 predicted_labels = [d['labels'][0] for d in predictions]
 data_frame['predicted_labels'] = predicted_labels
 
+print("Accurancy: ", np.mean(data_frame['predicted_labels'] == data_frame['labels']))
+
+# Convert prediction probs into an NxK matrix according to original label order
+N = len(data_frame)
+K = len(labels)
+label2idx = {v:k for k, v in enumerate(labels)}
+
+probs = np.zeros((N, K))
+for i in range(N):
+  # loop through labels and scores in corresponding order
+  d = predictions[i]
+  for label, score in zip(d['labels'], d['scores']):
+    k = label2idx[label]
+    probs[i, k] = score
+
+
+int_labels = [label2idx[x] for x in data_frame['labels']]
+
+int_preds = np.argmax(probs, axis=1)
+cm = confusion_matrix(int_labels, int_preds, normalize='true')
+
+
 
