@@ -59,5 +59,15 @@ int_labels = [label2idx[x] for x in data_frame['labels']]
 int_preds = np.argmax(probs, axis=1)
 cm = confusion_matrix(int_labels, int_preds, normalize='true')
 
+# Scikit-learn is transitioning to V1 but its not available on colab
+# The changes modify how confusion matrixes are plotted
+def plot_cm(cm):
+  df_cm = pd.DataFrame(cm, index=labels, clumns=labels)
+  ax = sn.heatmap(df_cm, annot=True, fmt='.2g')
+  ax.set_xlabel("Predicted")
+  ax.set_ylabel("Target")
+
+plot_cm(cm)
+
 
 
