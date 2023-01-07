@@ -70,6 +70,6 @@ def plot_cm(cm):
 plot_cm(cm)
 
 f1_score(data_frame['labels'], predicted_labels, average='micro')
-roc_auc_score(int_labels, probs, multi_class='ovo')
+roc_auc_score(int_labels, probs, multi_class='')
 
 
